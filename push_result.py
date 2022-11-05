@@ -6,16 +6,16 @@ from utils.alg_utils import init
 
 if __name__ == '__main__':
     config = init()
-    config['comm_radius'] = 2000
-    config['ebrp_estimate_radius'] = 1000
-    config['ver'] = '3.1'
-    config['actor_lr'] = 1e-6
-    config['critic_lr'] = 1e-5
+    config['comm_radius'] = 100
+    config['ebrp_estimate_radius'] = 100
+    config['ver'] = '5.1'
+    config['actor_lr'] = 1e-5
+    config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
-    big_ver = '/v3'
-    small_ver = '/v3.17'
+    big_ver = '/v4'
+    small_ver = '/v4.8'
     
     seedset = [1,2,3,4,5]
 
@@ -38,11 +38,11 @@ if __name__ == '__main__':
 
     with open(f'{path}/readme.md', 'w+') as f:
         f.truncate()
-        f.write(f'### 0 . seed1\n')
-        f.write('|name|figure|\n')
-        f.write('|:--:|:--:|\n')
-        f.write('|lifetime_avg|![image](https://github.com/ARM-CoMAL/iot_reward_shaping/blob/main' \
-            + big_ver + small_ver + f'/seed1/lifetime_avg.png)|\n')
+        # f.write(f'### 0 . seed1\n')
+        # f.write('|name|figure|\n')
+        # f.write('|:--:|:--:|\n')
+        # f.write('|lifetime_avg|![image](https://github.com/ARM-CoMAL/iot_reward_shaping/blob/main' \
+        #     + big_ver + small_ver + f'/seed1/lifetime_avg.png)|\n')
         idx = 1
         for seed in seedset:
             f.write(f'### {idx}. seed{seed}\n')

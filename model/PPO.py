@@ -144,8 +144,9 @@ class PPOCHSeletion(object):
 
         for _ in range(self.ppo_update_time):
             for index in BatchSampler(SubsetRandomSampler(range(len(b_obs))), self.batch_size, False):
-                new_action_prob = self.actor_net(b_obs[index]).gather(1, b_actions[index])
+                new_action_prob = self.actor_net(b_obs[index])
                 entropy = Categorical(new_action_prob).entropy()
+                new_action_prob = new_action_prob.gather(1, b_actions[index])
                 ratio = (new_action_prob/b_old_probs[index])
                 record_ppo_ratio(float(torch.mean(ratio)), self.config)
 

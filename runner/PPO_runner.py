@@ -4,7 +4,7 @@ from utils.log_utils import record_ac_loss, record_object, record_ppo_ratio
 
 
 class PPORunner(object):
-    def __init__(self, config) -> None:
+    def __init__(self, config, load_episode=-1) -> None:
         self.env_n = config['env_n']
         self.env_step = config['env_step']
         self.env = [RoutingEnv(config) for _ in range(self.env_n)]
@@ -14,6 +14,10 @@ class PPORunner(object):
         # for log
         self.max_round = -1
         self.save_freq = config['save_freq']
+
+        if load_episode != -1:
+            self.model.load(load_episode)
+            print("load model, episode: " + str(load_episode))
 
     def model_test(self):
         env = RoutingEnv(self.config)

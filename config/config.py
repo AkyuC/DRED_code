@@ -54,7 +54,7 @@ def init_config_file() -> None:
                 'save_freq': 10,
                 'map_range': 100,
                 'collected_dist': 50,
-                'round_baseline': 2000,
+                'round_baseline': 1800,
                 'round_base': 400,
                 'device': 'cuda',
                 'gpu': 0,

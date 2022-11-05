@@ -6,7 +6,10 @@ from runner.PPO_runner import PPORunner
 if __name__ == '__main__':
     config = init()
     mkdir(config, True)
-    runner = PPORunner(config)
+    runner = PPORunner(config, config['load_episode'])
 
     for idx_episode in range(config['max_episode']):
-        runner.run(idx_episode)
+        if config['load_episode'] != -1:
+            runner.run(idx_episode + config['load_episode'])
+        else:
+            runner.run(idx_episode)

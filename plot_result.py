@@ -85,11 +85,11 @@ def plot_total_energy():
 
 def get_avg_life_time_max():
     config = init()
-    config['comm_radius'] = 2000
-    config['ebrp_estimate_radius'] = 1000
-    config['ver'] = '4.0'
-    config['actor_lr'] = 1e-6
-    config['critic_lr'] = 1e-5
+    config['comm_radius'] = 100
+    config['ebrp_estimate_radius'] = 100
+    config['ver'] = '5.0'
+    config['actor_lr'] = 1e-5
+    config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
@@ -100,11 +100,11 @@ def get_avg_life_time_max():
 
 def plot_from_file():
     config = init()
-    config['comm_radius'] = 2000
-    config['ebrp_estimate_radius'] = 1000
-    config['ver'] = '4.0'
-    config['actor_lr'] = 1e-6
-    config['critic_lr'] = 1e-5
+    config['comm_radius'] = 100
+    config['ebrp_estimate_radius'] = 100
+    config['ver'] = '5.1'
+    config['actor_lr'] = 1e-5
+    config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
@@ -113,10 +113,10 @@ def plot_from_file():
     for seed in seedset:
         config['seed'] = seed
         mkdir(config, False)
-        plot_loss(config)
+        # plot_loss(config)
         plot_survival_time(config)
-        plot_ppo_ratio(config)
-        plot_ppo_state_value(config)
+        # plot_ppo_ratio(config)
+        # plot_ppo_state_value(config)
 #     plot_mean_survival_time(config, seedset, 5000)
 
 

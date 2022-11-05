@@ -17,6 +17,7 @@ def init():
     args.add_argument("--batch_size", type=int, default=32, help="batch_size")
     args.add_argument("--ebrp_alpha", type=float, default=0.1, help="ebrp_alpha")
     args.add_argument("--ebrp_beta", type=float, default=0.8, help="ebrp_beta")
+    args.add_argument("--load_episode", type=int, default=-1, help="load_episode")
     args = args.parse_args()
 
     config = get_config()
@@ -30,6 +31,7 @@ def init():
     config['batch_size'] = args.batch_size
     config['ebrp_alpha'] = args.ebrp_alpha
     config['ebrp_beta'] = args.ebrp_beta
+    config['load_episode'] = args.load_episode
 
     os.environ["CUDA_VISIBLE_DEVICES"] = str(config['gpu'])
     torch.manual_seed(args.seed)
