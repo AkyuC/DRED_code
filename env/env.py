@@ -58,9 +58,11 @@ class env:
             self.node[i].set_neighbor(neighbors[i])
         return True
     
-    def interval_step(self, idx_sink):
+    def interval_step(self, idx_sink, count=-1):
         self.reset_node_data_histo()
         action = self.proc_inter.get_route(self.node, idx_sink)
+        if count == 100 or count == 200:
+            print(f"action: {action}")
         self.idx_sink = idx_sink
         self.set_route(action)
         last_energy = self.get_node_energy()
