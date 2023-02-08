@@ -142,9 +142,9 @@ class env:
     def get_obs(self):
         obs = []
         for idx, pos in enumerate(self.pos_hard_code):
-            obs.append(self.node[idx].energy)
-            obs.append(pos[0])
-            obs.append(pos[1])
+            obs.append(self.node[idx].energy/0.15)
+            # obs.append(pos[0])
+            # obs.append(pos[1])
         return np.array(obs)
 
     def get_adj_matrix(self):

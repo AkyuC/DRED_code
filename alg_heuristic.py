@@ -53,12 +53,12 @@ def AlgGreedy_With_Minimize_Sum_Energy_Consume(seed=0, flag_save_total_energy=Fa
                 min_energy_consume = sum(energy_all_nodes - energy_next)
                 min_idx = idx
 
-        print(min_idx)
-        route = env.proc_inter.get_route(env.node, min_idx)
-        route_sort = [-1 for _ in range(20)]
-        for i in range(19):
-            route_sort[route[i][0]] = route[i][1]
-        print(route_sort)
+        # print(min_idx)
+        # route = env.proc_inter.get_route(env.node, min_idx)
+        # route_sort = [-1 for _ in range(20)]
+        # for i in range(19):
+        #     route_sort[route[i][0]] = route[i][1]
+        # print(route_sort)
         _, done = env.interval_step(min_idx)
 
     print(f"AlgGreedy_With_Minimize_Sum_Energy_Consume: {env.cnt_transmit}")
@@ -178,7 +178,7 @@ if __name__ == '__main__':
     # AlgRandom(0,False)
     # t1 = time()
     # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()
     # AlgGreedy()
@@ -194,22 +194,22 @@ if __name__ == '__main__':
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # AlgStatic(0,13,True)
 
-    result = [[],[],[],[],[]]
-    for seed in range(10):
-        result[0].append(AlgGreedy_With_Minimize_Sum_Energy_Consume(seed))
-        result[1].append(AlgGreedy(seed))
-        result[2].append(AlgRandom(seed))
-        result[3].append(AlgLeach_F(seed))
-        result[4].append(AlgStatic(seed))
+    # result = [[],[],[],[],[]]
+    # for seed in range(10):
+    #     result[0].append(AlgGreedy_With_Minimize_Sum_Energy_Consume(seed))
+    #     result[1].append(AlgGreedy(seed))
+    #     result[2].append(AlgRandom(seed))
+    #     result[3].append(AlgLeach_F(seed))
+    #     result[4].append(AlgStatic(seed))
 
-    print(" \n")
-    print(result)
+    # print(" \n")
+    # print(result)
 
-    print(" \n")
-    print(f"AlgGreedy_With_Minimize_Sum_Energy_Consume, mean: {mean(result[0])}, max: {max(result[0])}, min: {min(result[0])}")
-    print(f"Greedy, mean: {mean(result[1])}, max: {max(result[1])}, min: {min(result[1])}")
-    print(f"Random, mean: {mean(result[2])}, max: {max(result[2])}, min: {min(result[2])}")
-    print(f"LEACH-F, mean: {mean(result[3])}, max: {max(result[3])}, min: {min(result[3])}")
-    result_static = np.array(result[4])
-    print(f"Static, mean: {result_static.mean(axis=0)}, max: {result_static.max(axis=0)}, min: {result_static.min(axis=0)}")
+    # print(" \n")
+    # print(f"AlgGreedy_With_Minimize_Sum_Energy_Consume, mean: {mean(result[0])}, max: {max(result[0])}, min: {min(result[0])}")
+    # print(f"Greedy, mean: {mean(result[1])}, max: {max(result[1])}, min: {min(result[1])}")
+    # print(f"Random, mean: {mean(result[2])}, max: {max(result[2])}, min: {min(result[2])}")
+    # print(f"LEACH-F, mean: {mean(result[3])}, max: {max(result[3])}, min: {min(result[3])}")
+    # result_static = np.array(result[4])
+    # print(f"Static, mean: {result_static.mean(axis=0)}, max: {result_static.max(axis=0)}, min: {result_static.min(axis=0)}")
 

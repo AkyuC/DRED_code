@@ -8,14 +8,14 @@ if __name__ == '__main__':
     config = init()
     config['comm_radius'] = 100
     config['ebrp_estimate_radius'] = 100
-    config['ver'] = '5.1'
+    config['ver'] = '1.0'
     config['actor_lr'] = 1e-5
     config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
     big_ver = '/v4'
-    small_ver = '/v4.8'
+    small_ver = '/v4.11'
     
     seedset = [1,2,3,4,5]
 

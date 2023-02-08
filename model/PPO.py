@@ -43,15 +43,12 @@ class Critic(nn.Module):
         layer_init(self.fc1)
         self.fc2 = nn.Linear(512, 512)
         layer_init(self.fc2)
-        self.fc3 = nn.Linear(512, 512)
-        layer_init(self.fc3)
         self.state_value = nn.Linear(512, 1)
         layer_init(self.state_value)
 
     def forward(self, x):
         x = F.relu(self.fc1(x))
         x = F.relu(self.fc2(x))
-        x = F.relu(self.fc3(x))
         value = self.state_value(x)
         return value
 

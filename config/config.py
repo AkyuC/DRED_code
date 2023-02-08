@@ -21,7 +21,7 @@ def init_config_file() -> None:
                 'data_min': 500,
 
                 # for RL agent, nn params
-                'state_dim': 60,
+                'state_dim': 20,
                 'action_dim': 20,
                 'actor_lr':1e-5,
                 'critic_lr':1e-4,
@@ -55,7 +55,7 @@ def init_config_file() -> None:
                 'map_range': 100,
                 'collected_dist': 50,
                 'round_baseline': 1800,
-                'round_base': 400,
+                'round_base': 100,
                 'device': 'cuda',
                 'gpu': 0,
                 'seed': 0,
@@ -183,12 +183,12 @@ def new_topo():
 if __name__ == "__main__":
     # init_config_file()
     # show_config(get_config())
-    # new_topo()
-    ob = [(-298, -792), (-500, 200), (394, 598), (-900, -254), (162, -920),
-            (-124, 340), (66, 450), (-160, 148), (600, -250), (160, -24),
-            (-320, -600), (650, -454), (296, -442), (-590, 560), (640, 424),
-            (-96, -130), (-696, -256), (-336, 390), (100, 640), (-152, 712)]
-    out = []
-    for o in ob:
-        out.append((int(o[0]/3), int(o[1]/3)))
-    print(out)
+    new_topo()
+    # ob = [(-298, -792), (-500, 200), (394, 598), (-900, -254), (162, -920),
+    #         (-124, 340), (66, 450), (-160, 148), (600, -250), (160, -24),
+    #         (-320, -600), (650, -454), (296, -442), (-590, 560), (640, 424),
+    #         (-96, -130), (-696, -256), (-336, 390), (100, 640), (-152, 712)]
+    # out = []
+    # for o in ob:
+    #     out.append((int(o[0]/3), int(o[1]/3)))
+    # print(out)
