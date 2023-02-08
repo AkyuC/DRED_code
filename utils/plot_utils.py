@@ -52,19 +52,21 @@ def plot_mean_survival_time(config, seed_set, datalen=4000):
     min_lifetime = np.min(lifetime, axis=0)
     plt.rcParams['figure.figsize'] = (7,5)
     plt.rcParams['font.size'] = 16
-    plt.fill_between(np.arange(len(avg_lifetime)), max_lifetime, min_lifetime, color='#c6fcff')
-    plt.plot(np.arange(len(avg_lifetime)), avg_lifetime, color="#82cafc", label="Ours", linewidth = 2)
-    plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*144.6, color='orange', label="Random", alpha = 0.75, linewidth = 2)
-    plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*2187, color='green', label="Greedy", alpha = 0.75, linewidth = 2)
-    # plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*1713.4, color='red', label="n13", alpha = 0.75, linewidth = 2)
-    plt.ylabel("Network Lifetime / Rounds", fontdict={'family':'serif'})
-    plt.xlabel("Train Episode", fontdict={'family':'serif'})
+    plt.fill_between(np.arange(len(avg_lifetime)), max_lifetime, min_lifetime, color='coral')
+    plt.plot(np.arange(len(avg_lifetime)), avg_lifetime, color="red", label="DRED", linewidth = 2)
+    plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*1514.6, color='black', label="Random", alpha = 0.75, linewidth = 2)
+    plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*2179.7, color='green', label="Greedy", alpha = 0.75, linewidth = 2)
+    plt.plot(np.arange(len(avg_lifetime)), np.ones(len(avg_lifetime))*395.8, color='b', label="Static", alpha = 0.75, linewidth = 2)
+    plt.ylabel("Network Lifetime / Rounds")
+    plt.xlabel("Train Episode")
     # plt.title('lifetime')
     plt.legend()
+    ax = plt.gca()
+    ax.ticklabel_format(style='sci', scilimits=(-1,2), axis='x')
     config['seed'] = seed_set[0]
-    lifetime_path = get_object_path(config, False) + "/lifetime_avg.png"
+    lifetime_path = "./lifetime_avg.png"
     plt.savefig(lifetime_path, bbox_inches='tight', pad_inches=0.05, dpi=600)
-    lifetime_path = get_object_path(config, False) + "/lifetime_avg.eps"
+    lifetime_path = "./lifetime_avg.eps"
     plt.savefig(lifetime_path, format="eps", bbox_inches='tight', pad_inches=0.05, dpi=600)
     plt.close('all')
     print(max(avg_lifetime))

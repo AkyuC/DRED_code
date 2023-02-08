@@ -175,7 +175,7 @@ def AlgRotate(seed=0):
 
 if __name__ == '__main__':
     # AlgRotate()
-    # AlgRandom(0,False)
+    AlgRandom(0,True)
     # t1 = time()
     # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
     AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
