@@ -141,6 +141,8 @@ class PPOCHSeletion(object):
 
         for _ in range(self.ppo_update_time):
             for index in BatchSampler(SubsetRandomSampler(range(len(b_obs))), self.batch_size, False):
+                if len(index) < self.batch_size:
+                    continue
                 new_action_prob = self.actor_net(b_obs[index])
                 entropy = Categorical(new_action_prob).entropy()
                 new_action_prob = new_action_prob.gather(1, b_actions[index])

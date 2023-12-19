@@ -31,7 +31,7 @@ def init_config_file() -> None:
                 'max_grad_norm': 0.5,
                 'ppo_update_time': 4,
                 'buffer_capacity': 1000,
-                'batch_size': 64,
+                'batch_size': 32,
                 'energy_max': 0.045,
                 'energy_min': 0.01,
                 'entropy_coef':1e-2,

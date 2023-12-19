@@ -49,8 +49,8 @@ def AlgGreedy_With_Minimize_Sum_Energy_Consume(seed=0, flag_save_total_energy=Fa
                 env_tmp.node[node_idx].energy = env.node[node_idx].energy
             _,_ = env_tmp.interval_step(idx)
             energy_next = np.array(env_tmp.get_node_energy())
-            if min_energy_consume > sum(energy_all_nodes - energy_next):
-                min_energy_consume = sum(energy_all_nodes - energy_next)
+            if min_energy_consume > max(energy_all_nodes - energy_next):
+                min_energy_consume = max(energy_all_nodes - energy_next)
                 min_idx = idx
 
         # print(min_idx)
@@ -60,6 +60,7 @@ def AlgGreedy_With_Minimize_Sum_Energy_Consume(seed=0, flag_save_total_energy=Fa
         #     route_sort[route[i][0]] = route[i][1]
         # print(route_sort)
         _, done = env.interval_step(min_idx)
+        print(min_idx)
 
     print(f"AlgGreedy_With_Minimize_Sum_Energy_Consume: {env.cnt_transmit}")
     print(env.get_node_energy())
@@ -116,7 +117,7 @@ def AlgMaxEnergy(seed=0, flag_save_total_energy=False):
         a.append(sum(energy_all_nodes) - sum(env.get_node_energy()))
     print(min(a))
     print(max(a))
-    print(f"Random: {env.cnt_transmit}")
+    print(f"MaxEnergy: {env.cnt_transmit}")
     # print(avg_time/int(env.cnt_transmit/10))
     print(env.get_node_energy())
     
@@ -204,10 +205,10 @@ def AlgRotate(seed=0):
 
 if __name__ == '__main__':
     # # AlgRotate()
-    # AlgRandom(0,True)
-    # # t1 = time()
-    # # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    AlgRandom(0,False)
+    # t1 = time()
+    # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
+    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
     AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()
