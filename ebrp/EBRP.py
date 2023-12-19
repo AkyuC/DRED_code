@@ -17,14 +17,36 @@ class ebrp(object):
 
         self.resetUF()
         self.updateMatrix()
-        try:
-            return self.calcRoute()
-        except AssertionError:
-            neigbor_mask = np.zeros((self.numNode, self.numNode))
-            for i in range(self.numNode):
-                for nbr in self.node[i].neighbor_list:
-                    neigbor_mask[i][nbr["nodeId"]] = 1
-            return min_spanning_arborescence(self.combineDiff, neigbor_mask, idxSink)   
+        neigbor_mask = np.zeros((self.numNode, self.numNode))
+        for i in range(self.numNode):
+            for nbr in self.node[i].neighbor_list:
+                neigbor_mask[i][nbr["nodeId"]] = 1
+        return min_spanning_arborescence(self.combineDiff, neigbor_mask, idxSink)   
+        # try:
+        #     return self.calcRoute()
+        # except AssertionError:
+        #     neigbor_mask = np.zeros((self.numNode, self.numNode))
+        #     for i in range(self.numNode):
+        #         for nbr in self.node[i].neighbor_list:
+        #             neigbor_mask[i][nbr["nodeId"]] = 1
+        #     return min_spanning_arborescence(self.combineDiff, neigbor_mask, idxSink)   
+    
+    def get_route_distance_base(self, node, idxSink):
+        self.node = node
+        self.idxSink = idxSink
+        self.numNode = len(node)
+
+        self.resetUF()
+        self.updateMatrix()
+        for i in range(len(self.combineDiff)):
+            for j in range(len(self.combineDiff[0])):
+                if i != j:
+                    self.combineDiff[i, j] = 10000 - self.getDistBetweenNodes(i, j)
+        neigbor_mask = np.zeros((self.numNode, self.numNode))
+        for i in range(self.numNode):
+            for nbr in self.node[i].neighbor_list:
+                neigbor_mask[i][nbr["nodeId"]] = 1
+        return min_spanning_arborescence(self.combineDiff, neigbor_mask, idxSink)
 
     # 广度优先搜索计算节点深度
     def calcDepth(self):

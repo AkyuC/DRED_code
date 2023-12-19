@@ -2,13 +2,13 @@ import numpy as np
 
 
 class Node:
-    def __init__(self, node_id, pos, init_enery, \
+    def __init__(self, node_id, pos, init_energy, \
                 unit_cost_rec, unit_cost_send_dist, unit_cost_proc, died_threshold):
         self.node_id = node_id  # id标识，19号是sink
         self.pos = np.array(pos)
         self.depth = -1
         self.neighbor_list = []  # [邻居id、距离、剩余能量(可不可以获取)] 距离好像也用不太到
-        self.init_energy = init_enery
+        self.init_energy = init_energy
         self.unit_cost_rec = unit_cost_rec  # 接收数据的单位能量消耗/bit
         self.unit_cost_send_dist = unit_cost_send_dist
         self.unit_cost_proc = unit_cost_proc  # 处理数据的单位能量消耗/bit

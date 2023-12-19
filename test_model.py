@@ -25,13 +25,13 @@ def test_episode(config, episode_list, seed_set=[1,2,3,4,5]):
             env.reset()
             done = None
             state = env.get_obs()
-            print(env.pos_hard_code)
+            # print(env.pos_hard_code)
             count = 1
             while (not done) and (env.cnt_transmit < config['max_step']):
                 action, action_prob, probs_entropy = model.choose_abstract_action(state)
-                if count == 100 or count == 200:
-                    print(f"count: {count}, action: {action}")
-                    print(f"energy: {np.array(env.get_node_energy())/config['sensor_energy']*100}")
+                # if count == 100 or count == 200:
+                #     print(f"count: {count}, action: {action}")
+                #     print(f"energy: {np.array(env.get_node_energy())/config['sensor_energy']*100}")
                 reward, done = env.interval_step(action, count)
                 # print(reward)
                 state_next = env.get_obs() 
@@ -67,7 +67,7 @@ def test_best(config, seed_set=[1,2,3,4,5]):
                 #         f.write(str(np.sum(env.get_node_energy())) + "\n")
                 action, action_prob, probs_entropy = model.choose_abstract_action(state)
                 reward, done = env.interval_step(action)
-                # print(reward)
+                print(action)
                 state_next = env.get_obs() 
                 state = state_next
                 if done: break
@@ -95,7 +95,7 @@ def test_all(config, episode_range=[0,500]):
             while (not done) and (env.cnt_transmit < config['max_step']):
                 action, action_prob, probs_entropy = model.choose_abstract_action(state)
                 reward, done = env.interval_step(action)
-                # print(reward)
+                # print(action)
                 state_next = env.get_obs() 
                 state = state_next
                 if done: break
@@ -147,18 +147,18 @@ if __name__ == '__main__':
     config = init()
     config['comm_radius'] = 100
     config['ebrp_estimate_radius'] = 100
-    config['ver'] = '5.1'
+    config['ver'] = '1.1'
     config['actor_lr'] = 1e-5
     config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
-    # test_best(config, [3])
-    test_episode(config, [243860], [3])
+    # test_best(config, [2])
+    # test_episode(config, [24380], [3])
     # test_all(config, [300,700])
     # episode = 500
-    # for i in range(10):
-    #     test_episode(config, [243860+i*10], [3])
+    for i in range(100):
+        test_episode(config, [30610+i*10], [1])
     # for episode in range(350,500):
     #     get_total_energy_curve(config, seed=1, episode=episode)
     # get_total_energy_curve(config, seed=3, episode=24386)

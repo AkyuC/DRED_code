@@ -93,6 +93,35 @@ def AlgRandom(seed=0, flag_save_total_energy=False):
     
     return env.cnt_transmit
 
+def AlgMaxEnergy(seed=0, flag_save_total_energy=False):
+    config = init()
+
+    np.random.seed(seed)
+    random.seed(seed)
+
+    env = myenv(config)
+    done = False
+    avg_time = 0
+    a = []
+    while not done:
+        energy_all_nodes = env.get_node_energy()
+        center_node = energy_all_nodes.index(max(energy_all_nodes))
+        energy_all_nodes = np.array(energy_all_nodes)
+        if flag_save_total_energy:
+            with open("MaxEnergy_total_energy",'a+') as f:
+                f.write(str(np.sum(energy_all_nodes)) + "\n")
+        t1 = time()
+        avg_time += time()-t1
+        _, done = env.interval_step(center_node)
+        a.append(sum(energy_all_nodes) - sum(env.get_node_energy()))
+    print(min(a))
+    print(max(a))
+    print(f"Random: {env.cnt_transmit}")
+    # print(avg_time/int(env.cnt_transmit/10))
+    print(env.get_node_energy())
+    
+    return env.cnt_transmit
+
 def AlgLeach_F(seed=0):
     config = init()
 
@@ -174,11 +203,12 @@ def AlgRotate(seed=0):
 
 
 if __name__ == '__main__':
-    # AlgRotate()
-    AlgRandom(0,True)
-    # t1 = time()
-    # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    # # AlgRotate()
+    # AlgRandom(0,True)
+    # # t1 = time()
+    # # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
+    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()
     # AlgGreedy()

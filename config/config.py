@@ -21,7 +21,7 @@ def init_config_file() -> None:
                 'data_min': 500,
 
                 # for RL agent, nn params
-                'state_dim': 20,
+                'state_dim': 60,
                 'action_dim': 20,
                 'actor_lr':1e-5,
                 'critic_lr':1e-4,
@@ -31,12 +31,12 @@ def init_config_file() -> None:
                 'max_grad_norm': 0.5,
                 'ppo_update_time': 4,
                 'buffer_capacity': 1000,
-                'batch_size': 32,
+                'batch_size': 64,
                 'energy_max': 0.045,
                 'energy_min': 0.01,
                 'entropy_coef':1e-2,
                 'vf_coef': 0.5,
-                'env_n': 4,
+                'env_n': 1,
                 'env_step': 128,
 
                 # runner

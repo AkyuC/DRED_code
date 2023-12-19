@@ -1,4 +1,5 @@
 from ebrp.EBRP import ebrp
+from ebrp.ear import ear
 from env.node import NodeRL as Node
 import numpy as np
 
@@ -12,9 +13,12 @@ class env:
             self.config['unit_cost_rec'], self.config['unit_cost_send'], \
             self.config['unit_cost_proc'], self.config['died_threshold']
             ) for i in range(self.num_node)]
+        assert self.set_neighbor()
+
+
         self.idx_sink = self.num_node - 1
         self.proc_inter = ebrp(config) # inter-cluster protocol
-        assert self.set_neighbor()
+        # self.proc_inter = ear(config, self.node) # inter-cluster protocol
 
         self.state_dim = self.config['state_dim']
         self.action_dim = self.num_node
@@ -58,11 +62,13 @@ class env:
             self.node[i].set_neighbor(neighbors[i])
         return True
     
-    def interval_step(self, idx_sink, count=-1):
+    def interval_step(self, idx_sink):
         self.reset_node_data_histo()
         action = self.proc_inter.get_route(self.node, idx_sink)
-        if count == 100 or count == 200:
-            print(f"action: {action}")
+        # print(action)
+        # action = self.proc_inter.get_route_distance_base(self.node, idx_sink)
+        # if count == 100 or count == 200:
+        #     print(f"action: {action}")
         self.idx_sink = idx_sink
         self.set_route(action)
         last_energy = self.get_node_energy()
@@ -145,8 +151,8 @@ class env:
         obs = []
         for idx, pos in enumerate(self.pos_hard_code):
             obs.append(self.node[idx].energy/0.15)
-            # obs.append(pos[0])
-            # obs.append(pos[1])
+            obs.append(pos[0])
+            obs.append(pos[1])
         return np.array(obs)
 
     def get_adj_matrix(self):

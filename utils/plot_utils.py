@@ -30,9 +30,10 @@ def plot_survival_time(config):
     lifetime_path = get_object_path(config, False) + "/lifetime.png"
     plt.figure(figsize=(10,3))
     lifetime = np.loadtxt(get_object_path(config, True) + "/lifetime")
+    print(max(lifetime))
     plt.plot(np.arange(len(lifetime)), lifetime, label="DRED")
     plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2253, label='Greedy')
-    plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*516, label='Rotate')
+    plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2188, label='MaxEnergy')
     plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1626, label='Random')
     plt.legend()
     plt.ylabel("lifetime")
