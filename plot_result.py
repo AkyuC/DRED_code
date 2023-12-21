@@ -90,7 +90,7 @@ def plot_from_file():
     config = init()
     config['comm_radius'] = 100
     config['ebrp_estimate_radius'] = 100
-    config['ver'] = '1.1'
+    config['ver'] = '1.2'
     config['actor_lr'] = 1e-5
     config['critic_lr'] = 1e-4
     config['batch_size'] = 32

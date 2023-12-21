@@ -88,11 +88,6 @@ class ear():
                 nextHop = np.random.choice(range(self.numNode), p=self.probTable[i, :])
             except Exception as err:
                 print(err)
-                print(self.cMatrix[i,:].tolist())
-                print(self.probTable[i,:].tolist())
-                print(self.transTable[i,:,:].tolist())
-                print(" " + str(i))
-                self.updateProb(i)
             ret.append((i, nextHop))
         return ret
     

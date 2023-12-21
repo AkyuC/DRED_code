@@ -29,14 +29,14 @@ def init_config_file() -> None:
                 'gae_lambda': 0.9, 
                 'clip_param': 0.15,
                 'max_grad_norm': 0.5,
-                'ppo_update_time': 4,
-                'buffer_capacity': 1000,
+                'ppo_update_time': 10,
+                'buffer_capacity': 10000,
                 'batch_size': 32,
                 'energy_max': 0.045,
                 'energy_min': 0.01,
                 'entropy_coef':1e-2,
                 'vf_coef': 0.5,
-                'env_n': 1,
+                'env_n': 8,
                 'env_step': 128,
 
                 # runner
