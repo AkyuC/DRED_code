@@ -89,7 +89,7 @@ def AlgRandom(seed=0, flag_save_total_energy=False):
     print(min(a))
     print(max(a))
     print(f"Random: {env.cnt_transmit}")
-    # print(avg_time/int(env.cnt_transmit/10))
+    print(avg_time/int(env.cnt_transmit/10))
     print(env.get_node_energy())
     
     return env.cnt_transmit
@@ -208,8 +208,8 @@ if __name__ == '__main__':
     AlgRandom(0,False)
     # t1 = time()
     # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
-    AlgMaxEnergy(0,False)
+    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    # AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()
     # AlgGreedy()

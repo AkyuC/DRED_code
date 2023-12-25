@@ -1,5 +1,5 @@
-from ebrp.EBRP import ebrp
-from ebrp.ear import ear
+from proc.EBRP import ebrp
+from proc.ear import ear
 from env.node import NodeRL as Node
 import numpy as np
 
@@ -17,8 +17,8 @@ class env:
 
 
         self.idx_sink = self.num_node - 1
-        self.proc_inter = ebrp(config) # inter-cluster protocol
-        # self.proc_inter = ear(config, self.node) # inter-cluster protocol
+        # self.proc_inter = ebrp(config) # inter-cluster protocol
+        self.proc_inter = ear(config, self.node) # inter-cluster protocol
 
         self.state_dim = self.config['state_dim']
         self.action_dim = self.num_node

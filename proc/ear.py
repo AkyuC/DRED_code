@@ -20,6 +20,9 @@ class ear():
         self.numNode = config["action_dim"]
         # 列表元素为每个节点的邻居集合
         self.nbrSetList = self.getNbrSetList()
+        dist = lambda i, j: np.sqrt(np.sum(np.power(self.node[i].pos - self.node[j].pos, 2)))
+        self.distMatrix = [[dist(i,j) for j in range(self.numNode)] for i in range(self.numNode)]
+        self.maskMatrix = [self.getTransTable(i) for i in range(self.numNode)]
 
     def getNbrSetList(self):
         ret = []
@@ -30,14 +33,16 @@ class ear():
             ret.append(nbrSet)
         return ret
 
-    def getTransTable(self):  # source:i; dest:sink; j->k
+    def getTransTable(self, idxSink=-1):  # source:i; dest:sink; j->k
+        if idxSink == -1:
+            idxSink = self.idxSink
         mask = np.zeros((self.numNode, self.numNode, self.numNode), dtype=np.int8)
         for i in range(self.numNode):
-            if i == self.idxSink:
+            if i == idxSink:
                 continue
             for j in range(self.numNode):
                 for k in self.nbrSetList[j]:
-                    if (self.getDistBetweenNodes(j, self.idxSink) > self.getDistBetweenNodes(k, self.idxSink)) \
+                    if (self.getDistBetweenNodes(j, idxSink) > self.getDistBetweenNodes(k, idxSink)) \
                             and (self.getDistBetweenNodes(j, i) < self.getDistBetweenNodes(k, i)):
                         mask[i, j, k] = 1
         return mask
@@ -92,7 +97,7 @@ class ear():
         return ret
     
     def getDistBetweenNodes(self, i, j):
-        return np.sqrt(np.sum(np.power(self.node[i].pos - self.node[j].pos, 2)))
+        return self.distMatrix[i][j]
     
     def get_route(self, node, idxSink):
         self.idxSink = idxSink
@@ -100,7 +105,7 @@ class ear():
         self.numNode = len(node)
 
         # 路由表
-        self.transTable = self.getTransTable()  # binary
+        self.transTable = self.maskMatrix[idxSink]
         # 节点开销
         self.costList = np.zeros(self.numNode, dtype=np.float64)
         # 路径开销

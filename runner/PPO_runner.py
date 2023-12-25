@@ -48,12 +48,8 @@ class PPORunner(object):
                 break
 
     def run(self, cnt_episode):
-        with ThreadPoolExecutor(max_workers=self.env_n) as pool:
-            all_task = []
-            for buffer_i in range(self.env_n):
-                all_task.append(pool.submit(self.get_transition, buffer_i))
-            wait(all_task, return_when=ALL_COMPLETED)
-            all_task.clear()
+        for buffer_i in range(self.env_n):
+            self.get_transition(buffer_i)
 
         aloss, closs = self.model.update()
         for idx in range(len(aloss)):

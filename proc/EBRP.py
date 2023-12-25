@@ -1,7 +1,7 @@
 import copy
 import numpy as np
 
-from ebrp.MDST import min_spanning_arborescence
+from proc.MDST import min_spanning_arborescence
 
 class ebrp(object):
     def __init__(self, config):
