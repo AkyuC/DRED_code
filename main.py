@@ -8,7 +8,7 @@ if __name__ == '__main__':
     mkdir(config, True)
     runner = PPORunner(config, config['load_episode'])
 
-    # rm -rf ./*/*/*v1.4*
+    # rm -rf ./*/*/*v1.5*
 
     for idx_episode in range(config['max_episode']):
         if config['load_episode'] != -1:

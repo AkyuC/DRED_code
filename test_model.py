@@ -18,25 +18,19 @@ def test_episode(config, episode_list, seed_set=[1,2,3,4,5]):
         config['seed'] = seed
         model.load(episode_list[s_i])
         result_list = []
-        for s in range(1):
+        for s in range(10):
             np.random.seed(s)
             random.seed(s)
             torch.manual_seed(s)
             env.reset()
             done = None
             state = env.get_obs()
-            # print(env.pos_hard_code)
-            count = 1
             while (not done) and (env.cnt_transmit < config['max_step']):
                 action, action_prob, probs_entropy = model.choose_abstract_action(state)
-                # if count == 100 or count == 200:
-                #     print(f"count: {count}, action: {action}")
-                #     print(f"energy: {np.array(env.get_node_energy())/config['sensor_energy']*100}")
-                reward, done = env.interval_step(action, count)
+                reward, done = env.interval_step(action)
                 # print(reward)
                 state_next = env.get_obs() 
                 state = state_next
-                count += 1
                 if done: break
             result_list.append(env.cnt_transmit)
         print(f"seed:{seed}, episode {episode_list[s_i]}, mean: {mean(result_list)}, max: {max(result_list)}, min: {min(result_list)}")
@@ -158,7 +152,7 @@ if __name__ == '__main__':
     # test_all(config, [300,700])
     # episode = 500
     for i in range(100):
-        test_episode(config, [30610+i*10], [1])
+        test_episode(config, [40000+i*10], [5])
     # for episode in range(350,500):
     #     get_total_energy_curve(config, seed=1, episode=episode)
     # get_total_energy_curve(config, seed=3, episode=24386)

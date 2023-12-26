@@ -23,8 +23,6 @@ def init():
     config = get_config()
     config['gpu'] = args.cudaDevice
     config['seed'] = args.seed
-    config['comm_radius'] = args.comm_radius
-    config['ebrp_estimate_radius'] = args.es_radius
     config['ver'] = args.ver
     config['actor_lr'] = args.alr
     config['critic_lr'] = args.clr

@@ -116,21 +116,21 @@ class PPOCHSeletion(object):
 
         closs_list = []
         aloss_list = []
-        state = (torch.tensor([t.state.tolist()for b in self.buffer for t in b], dtype=torch.float)).type(FloatTensor)
-        actions = (torch.tensor([t.action for b in self.buffer for t in b], dtype=torch.long)).type(LongTensor)
-        rewards = torch.tensor([t.reward for b in self.buffer for t in b]).type(FloatTensor)
-        dones = (torch.tensor([t.done + 0 for b in self.buffer for t in b], dtype=torch.float)).type(FloatTensor)
-        next_state = (torch.tensor([t.next_state.tolist() for b in self.buffer for t in b], dtype=torch.float)).type(FloatTensor)
-        old_action_prob = (torch.tensor([t.a_prob for b in self.buffer for t in b], dtype=torch.float)).type(FloatTensor)
+        state = (torch.tensor([[t.state.tolist() for t in b] for b in self.buffer], dtype=torch.float)).type(FloatTensor)
+        actions = (torch.tensor([[t.action for t in b] for b in self.buffer], dtype=torch.long)).type(LongTensor)
+        rewards = torch.tensor([[t.reward for t in b] for b in self.buffer]).type(FloatTensor)
+        dones = (torch.tensor([[t.done + 0 for t in b] for b in self.buffer], dtype=torch.float)).type(FloatTensor)
+        next_state = (torch.tensor([[t.next_state.tolist() for t in b] for b in self.buffer], dtype=torch.float)).type(FloatTensor)
+        old_action_prob = (torch.tensor([[t.a_prob for t in b] for b in self.buffer], dtype=torch.float)).type(FloatTensor)
 
         next_values = torch.squeeze(self.critic_net(next_state))
         values = torch.squeeze(self.critic_net(state))
         advantages = torch.zeros_like(rewards).type(FloatTensor)
         lastgaelam = 0
-        for t in reversed(range(len(dones))):
-            terminated_flag = (1.0 - dones[t])
-            delta = rewards[t] + (self.gamma)*next_values[t]*terminated_flag - values[t]
-            advantages[t] = lastgaelam = delta + self.gamma*self.gae_lambda*terminated_flag*lastgaelam
+        for t in reversed(range(self.config['env_step'])):
+            terminated_flag = (1.0 - dones[:,t])
+            delta = rewards[:,t] + self.gamma * next_values[:,t] * terminated_flag - values[:,t]
+            advantages[:,t] = lastgaelam = delta + self.gamma * self.gae_lambda * terminated_flag * lastgaelam
         returns = advantages + values
 
         b_obs = state.reshape((-1, self.state_dim)).type(FloatTensor).detach()

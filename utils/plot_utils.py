@@ -32,26 +32,26 @@ def plot_survival_time(config):
     lifetime = np.loadtxt(get_object_path(config, True) + "/lifetime")
     print(max(lifetime))
     plt.plot(np.arange(len(lifetime)), lifetime, label="DRED")
-    # # EBRP 50
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2253, label='Greedy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2188, label='MaxEnergy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1626, label='Random')
-    # # EBRP 100
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2253, label='Greedy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2188, label='MaxEnergy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1626, label='Random')
-    # # EBRP 150
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1094, label='Greedy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2187, label='MaxEnergy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1688, label='Random')
-    # # EBRP 200
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1094, label='Greedy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2187, label='MaxEnergy')
-    # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1688, label='Random')
-    # # EAR 100
-    plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*235, label='Greedy')
-    plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2549, label='MaxEnergy')
-    plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2451, label='Random')
+    if config["comm_radius"] == 70:
+        # EBRP 70
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1663, label='Greedy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1518, label='MaxEnergy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1394, label='Random')
+    if config["comm_radius"] == 100:
+        # EBRP 100
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2262, label='Greedy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2187, label='MaxEnergy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1688, label='Random')
+        # # EAR 100
+        # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*235, label='Greedy')
+        # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2549, label='MaxEnergy')
+        # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2451, label='Random')
+    if config["comm_radius"] == 130:
+        # EBRP 130
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2613, label='Greedy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2437, label='MaxEnergy')
+        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1778, label='Random')
+    
     plt.legend()
     plt.ylabel("lifetime")
     plt.xlabel("episode")

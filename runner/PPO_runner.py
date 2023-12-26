@@ -32,24 +32,18 @@ class PPORunner(object):
             state = state_next
             if done: break
         return env.cnt_transmit
-    
-    def get_transition(self, idx):
-        self.env[idx].reset()
-        state = self.env[idx].get_obs()
-        done = None
-        while(True): 
-            action, action_prob, probs_entropy = self.model.choose_abstract_action(state)
-            reward, done = self.env[idx].interval_step(action)
-            state_next = self.env[idx].get_obs()
-            self.model.store_transition(state, action, action_prob, reward, done, state_next, idx)
-            state = state_next
-
-            if done:
-                break
 
     def run(self, cnt_episode):
-        for buffer_i in range(self.env_n):
-            self.get_transition(buffer_i)
+        for _ in range(self.env_step):
+            for idx in range(self.env_n):
+                state = self.env[idx].get_obs()
+                action, action_prob, probs_entropy = self.model.choose_abstract_action(state)
+                reward, done = self.env[idx].interval_step(action)
+                state_next = self.env[idx].get_obs()
+                self.model.store_transition(state, action, action_prob, reward, done, state_next, idx)
+
+                if done:
+                    self.env[idx].reset()
 
         aloss, closs = self.model.update()
         for idx in range(len(aloss)):

@@ -203,10 +203,10 @@ def AlgRotate(seed=0):
 
 
 if __name__ == '__main__':
-    # # AlgRotate()
+    # AlgRotate()
     AlgRandom(0,False)
-    # t1 = time()
-    # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
+    t1 = time()
+    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
     AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
     AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
@@ -227,9 +227,9 @@ if __name__ == '__main__':
     # result = [[],[],[],[],[]]
     # for seed in range(10):
     #     result[0].append(AlgGreedy_With_Minimize_Sum_Energy_Consume(seed))
-    #     result[1].append(AlgGreedy(seed))
+    #     # result[1].append(AlgGreedy(seed))
     #     result[2].append(AlgRandom(seed))
-    #     result[3].append(AlgLeach_F(seed))
+    #     result[3].append(AlgMaxEnergy(seed))
     #     result[4].append(AlgStatic(seed))
 
     # print(" \n")
@@ -237,9 +237,9 @@ if __name__ == '__main__':
 
     # print(" \n")
     # print(f"AlgGreedy_With_Minimize_Sum_Energy_Consume, mean: {mean(result[0])}, max: {max(result[0])}, min: {min(result[0])}")
-    # print(f"Greedy, mean: {mean(result[1])}, max: {max(result[1])}, min: {min(result[1])}")
+    # # print(f"Greedy, mean: {mean(result[1])}, max: {max(result[1])}, min: {min(result[1])}")
     # print(f"Random, mean: {mean(result[2])}, max: {max(result[2])}, min: {min(result[2])}")
-    # print(f"LEACH-F, mean: {mean(result[3])}, max: {max(result[3])}, min: {min(result[3])}")
+    # print(f"AlgMaxEnergy, mean: {mean(result[3])}, max: {max(result[3])}, min: {min(result[3])}")
     # result_static = np.array(result[4])
     # print(f"Static, mean: {result_static.mean(axis=0)}, max: {result_static.max(axis=0)}, min: {result_static.min(axis=0)}")
 
