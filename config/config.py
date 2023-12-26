@@ -14,7 +14,8 @@ def init_config_file() -> None:
                 'unit_cost_proc': 0,   # /b
 
                 # communication radius
-                'comm_radius': 100,
+                'comm_radius': 200,
+                'ebrp_estimate_radius': 200,
 
                 # iot data set
                 'data_max': 1000,
@@ -47,7 +48,6 @@ def init_config_file() -> None:
                 # EBRP
                 'ebrp_alpha': 0.1,
                 'ebrp_beta': 0.8,
-                'ebrp_estimate_radius': 100,
 
                 # others
                 'alg': 'PPO',
