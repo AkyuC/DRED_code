@@ -47,27 +47,36 @@ def test_best(config, seed_set=[1,2,3,4,5]):
             episode = int(file.readline())
             model.actor_net.load_state_dict(torch.load(path + f'/actor_best.ckpt'))
             model.critic_net.load_state_dict(torch.load(path + f'/critic_best.ckpt'))
-        result_list = []
-        for s in range(1):
-            np.random.seed(s)
-            random.seed(s)
-            torch.manual_seed(s)
-            env.reset()
-            done = None
-            state = env.get_obs()
-            while (not done) and (env.cnt_transmit < config['max_step']):
-                # if s == 4:
-                #     with open("Ours_total_energy",'a+') as f:
-                #         f.write(str(np.sum(env.get_node_energy())) + "\n")
-                action, action_prob, probs_entropy = model.choose_abstract_action(state)
-                reward, done = env.interval_step(action)
-                print(action)
-                state_next = env.get_obs() 
-                state = state_next
-                if done: break
-            result_list.append(env.cnt_transmit)
-            print(env.cnt_transmit)
-        print(f"seed:{seed}, episode {episode}, mean: {mean(result_list)}, max: {max(result_list)}, min: {min(result_list)}")
+        timeMean = []
+        timeMax = []
+        timeMin = []
+        for omega in range(20):
+            env.trans_in_interval = (omega+1)
+            result_list = []
+            for s in range(10):
+                np.random.seed(s)
+                random.seed(s)
+                torch.manual_seed(s)
+                env.reset()
+                done = None
+                state = env.get_obs()
+                while (not done) and (env.cnt_transmit < config['max_step']):
+                    # if s == 4:
+                    #     with open("Ours_total_energy",'a+') as f:
+                    #         f.write(str(np.sum(env.get_node_energy())) + "\n")
+                    action, action_prob, probs_entropy = model.choose_abstract_action(state)
+                    reward, done = env.interval_step(action)
+                    # print(action)
+                    state_next = env.get_obs() 
+                    state = state_next
+                    if done: break
+                result_list.append(env.cnt_transmit)
+                # print(env.cnt_transmit)
+            timeMean.append(mean(result_list))
+            timeMax.append(max(result_list))
+            timeMin.append(min(result_list))
+            print(f"episode {episode}, mean max min: {mean(result_list)}, {max(result_list)}, {min(result_list)}")
+        print(timeMean, timeMax, timeMin)
 
 def test_all(config, episode_range=[0,500]):
     config = config
@@ -102,7 +111,7 @@ def test_all(config, episode_range=[0,500]):
         with open(get_object_path(config, True) + '/lifetime_avg', 'a+') as f:
             f.write(str(mean(result_list)) + "\n")
 
-        print(f"episode {episode}, mean: {mean(result_list)}, max: {max(result_list)}, min: {min(result_list)}")
+        print(f"episode {episode}, mean max min: {mean(result_list)}, {max(result_list)}, {min(result_list)}")
 
 def get_total_energy_curve(config, seed, episode=-1):
     config = config
@@ -147,12 +156,12 @@ if __name__ == '__main__':
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
-    # test_best(config, [2])
+    test_best(config, [5])
     # test_episode(config, [24380], [3])
     # test_all(config, [300,700])
     # episode = 500
-    for i in range(100):
-        test_episode(config, [40000+i*10], [5])
+    # for i in range(200):
+        # test_episode(config, [41000+i*10], [5])
     # for episode in range(350,500):
     #     get_total_energy_curve(config, seed=1, episode=episode)
     # get_total_energy_curve(config, seed=3, episode=24386)

@@ -176,39 +176,29 @@ def AlgRotate(seed=0):
     ret = []
 
     env = myenv(config)
-    node_dist = []
-    for node in env.node:
-        node_dist.append((sqrt(node.pos[0] ** 2 + node.pos[1] ** 2), node.node_id))
-    def takefirst(elem):
-        return elem[0]
-    node_dist.sort(key=takefirst)
-    idx_list = [n[1] for n in node_dist]
+    count = [0, 18, 18, 19, 17, 17, 16, 12, 13, 1, 1, 15, 13, 13, 2, 3, 18, 17, 19, 19]
+    pi = np.array(count)/sum(count)
+    idx_list = np.array([i for i in range(env.num_node)])
 
-    for idx_r in range(len(idx_list)):
-        for seed in range(1):
-            env.reset()
-            np.random.seed(seed)
-            random.seed(seed)
-            done = False
-            idx = 0
-            while not done:
-                _, done = env.interval_step(idx_list[idx])
-                idx = (idx+1)%(idx_r+1)
-            ret.append(env.cnt_transmit)
+    for seed in range(10):
+        env.reset()
+        np.random.seed(seed)
+        random.seed(seed)
+        done = False
+        while not done:
+            _, done = env.interval_step(np.random.choice(idx_list, p=pi))
+        ret.append(env.cnt_transmit)
 
-        print(f"Rotate: {env.cnt_transmit}, idx_list: {idx_list[0:idx_r+1]}")
-        # print(f"Rotate,idx_list{idx_list}, mean: {mean(ret)}, max: {max(ret)}, min: {min(ret)}")
-        # print(env.get_node_energy())
-        # return env.cnt_transmit
+        print(f"Rotate: {env.cnt_transmit}")
 
 
 if __name__ == '__main__':
     # AlgRotate()
     AlgRandom(0,False)
-    t1 = time()
-    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
-    AlgMaxEnergy(0,False)
+    # t1 = time()
+    # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
+    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    # AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()
     # AlgGreedy()
@@ -226,11 +216,11 @@ if __name__ == '__main__':
 
     # result = [[],[],[],[],[]]
     # for seed in range(10):
-    #     result[0].append(AlgGreedy_With_Minimize_Sum_Energy_Consume(seed))
-    #     # result[1].append(AlgGreedy(seed))
-    #     result[2].append(AlgRandom(seed))
-    #     result[3].append(AlgMaxEnergy(seed))
-    #     result[4].append(AlgStatic(seed))
+        # result[0].append(AlgGreedy_With_Minimize_Sum_Energy_Consume(seed))
+        # # result[1].append(AlgGreedy(seed))
+        # result[2].append(AlgRandom(seed))
+        # result[3].append(AlgMaxEnergy(seed))
+        # result[4].append(AlgStatic(seed))
 
     # print(" \n")
     # print(result)
@@ -242,4 +232,4 @@ if __name__ == '__main__':
     # print(f"AlgMaxEnergy, mean: {mean(result[3])}, max: {max(result[3])}, min: {min(result[3])}")
     # result_static = np.array(result[4])
     # print(f"Static, mean: {result_static.mean(axis=0)}, max: {result_static.max(axis=0)}, min: {result_static.min(axis=0)}")
-
+    # print("")

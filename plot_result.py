@@ -129,10 +129,10 @@ def get_avg_life_time_max():
 
 
 if __name__ == '__main__':
-    plot_from_file('1.3', 100, 100)
-    plot_from_file('1.5', 50, 50)
-    plot_from_file('1.6', 150, 150)
-    plot_from_file('1.7', 200, 200)
+    # plot_from_file('1.1', 100, 100)
+    plot_from_file('1.5', 70, 70)
+    plot_from_file('1.6', 100, 100)
+    plot_from_file('1.7', 130, 130)
 
     # plot_from_file('1.4', 100, 100)
     # plot_static()

@@ -14,15 +14,15 @@ def init_config_file() -> None:
                 'unit_cost_proc': 0,   # /b
 
                 # communication radius
-                'comm_radius': 130,
-                'ebrp_estimate_radius': 130,
+                'comm_radius': 100,
+                'ebrp_estimate_radius': 100,
 
                 # iot data set
                 'data_max': 1000,
                 'data_min': 500,
 
                 # for RL agent, nn params
-                'state_dim': 60,
+                'state_dim': 20,
                 'action_dim': 20,
                 'actor_lr':1e-5,
                 'critic_lr':1e-4,
