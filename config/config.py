@@ -14,8 +14,8 @@ def init_config_file() -> None:
                 'unit_cost_proc': 0,   # /b
 
                 # communication radius
-                'comm_radius': 100,
-                'ebrp_estimate_radius': 100,
+                'comm_radius': 130,
+                'ebrp_estimate_radius': 130,
 
                 # iot data set
                 'data_max': 1000,
@@ -43,7 +43,7 @@ def init_config_file() -> None:
                 # runner
                 'max_step': 99999,
                 'max_episode': 999999,
-                'trans_in_interval': 10,
+                'trans_in_interval': 15,
 
                 # EBRP
                 'ebrp_alpha': 0.1,

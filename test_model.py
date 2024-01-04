@@ -50,7 +50,8 @@ def test_best(config, seed_set=[1,2,3,4,5]):
         timeMean = []
         timeMax = []
         timeMin = []
-        for omega in range(20):
+        for omega in range(1):
+            omega = 9
             env.trans_in_interval = (omega+1)
             result_list = []
             for s in range(10):
@@ -150,13 +151,13 @@ if __name__ == '__main__':
     config = init()
     config['comm_radius'] = 100
     config['ebrp_estimate_radius'] = 100
-    config['ver'] = '1.1'
+    config['ver'] = '1.6'
     config['actor_lr'] = 1e-5
     config['critic_lr'] = 1e-4
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
-    test_best(config, [5])
+    test_best(config, [4])
     # test_episode(config, [24380], [3])
     # test_all(config, [300,700])
     # episode = 500

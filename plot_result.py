@@ -86,7 +86,7 @@ def plot_total_energy():
     plt.close('all')
     
 
-def plot_from_file(ver='1.4', comm_radius=100, ebrp_estimate_radius=100):
+def plot_from_file(ver='1.4', comm_radius=100, ebrp_estimate_radius=100, interval=10):
     config = init()
     config['comm_radius'] = comm_radius
     config['ebrp_estimate_radius'] = ebrp_estimate_radius
@@ -96,6 +96,7 @@ def plot_from_file(ver='1.4', comm_radius=100, ebrp_estimate_radius=100):
     config['batch_size'] = 32
     config['ebrp_alpha'] = 0.1
     config['ebrp_beta'] = 0.8
+    config['interval'] = interval
     
     seedset = [1,2,3,4,5]
     for seed in seedset:
@@ -130,9 +131,11 @@ def get_avg_life_time_max():
 
 if __name__ == '__main__':
     # plot_from_file('1.1', 100, 100)
-    plot_from_file('1.5', 70, 70)
-    plot_from_file('1.6', 100, 100)
-    plot_from_file('1.7', 130, 130)
+    # plot_from_file('1.5', 70, 70)
+    plot_from_file('1.8', 100, 100, interval=5)
+    # plot_from_file('1.9', 100, 100, interval=15)
+    # plot_from_file('1.10', 70, 70)
+    plot_from_file('1.11', 130, 130)
 
     # plot_from_file('1.4', 100, 100)
     # plot_static()

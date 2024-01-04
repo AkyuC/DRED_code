@@ -197,7 +197,7 @@ if __name__ == '__main__':
     AlgRandom(0,False)
     # t1 = time()
     # # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,True)
-    # AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
+    AlgGreedy_With_Minimize_Sum_Energy_Consume(0,False)
     # AlgMaxEnergy(0,False)
     # print('程序运行时间:%s毫秒' % ((time() - t1)*1000))
     # t1 = time()

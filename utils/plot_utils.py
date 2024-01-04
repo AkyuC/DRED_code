@@ -38,10 +38,21 @@ def plot_survival_time(config):
         plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1518, label='MaxEnergy')
         plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1394, label='Random')
     if config["comm_radius"] == 100:
-        # EBRP 100
-        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2262, label='Greedy')
-        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2187, label='MaxEnergy')
-        plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1688, label='Random')
+        if config["interval"] == 5:
+        # EBRP 100, decision interval = 5
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2360, label='Greedy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2259, label='MaxEnergy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1974, label='Random')
+        if config["interval"] == 10:
+            # EBRP 100, decision interval = 10
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2262, label='Greedy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2187, label='MaxEnergy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1688, label='Random')
+        if config["interval"] == 15:
+            # EBRP 100, decision interval = 15
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2208, label='Greedy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2114, label='MaxEnergy')
+            plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*1574, label='Random')
         # # EAR 100
         # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*235, label='Greedy')
         # plt.plot(np.arange(len(lifetime)), np.ones(len(lifetime))*2549, label='MaxEnergy')

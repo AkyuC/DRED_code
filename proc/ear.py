@@ -1,6 +1,7 @@
 import copy
 import math
 import numpy as np
+from proc.MDST import min_spanning_arborescence
 
 # 能量消耗模型
 E_recv = 50e-9
@@ -116,3 +117,20 @@ class ear():
         self.updateMatrix()
         
         return self.calcRoute()
+
+        # return self.updateNewMatrix()
+    
+    def updateNewMatrix(self):
+        self.cMatrix = np.zeros((self.numNode, self.numNode), dtype=np.float64)
+        for i in range(self.numNode):
+            for j in range(self.numNode):
+                if i == j :
+                    continue
+                m1 = (E_send * self.getDistBetweenNodes(j, i) ** 2 + E_recv) ** PARAMS["alpha"]
+                m2 = ((self.node[i].energy+self.node[j].energy) / self.node[i].init_energy) ** PARAMS["beta"]
+                self.cMatrix[i,j] = m1 * m2
+        neigbor_mask = np.zeros((self.numNode, self.numNode))
+        for i in range(self.numNode):
+            for nbr in self.node[i].neighbor_list:
+                neigbor_mask[i][nbr["nodeId"]] = 1
+        return min_spanning_arborescence(self.cMatrix, neigbor_mask, self.idxSink)   
